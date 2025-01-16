@@ -23,3 +23,4 @@ rootProject.name = "JonathanSniderCocktail"
 include(":app")
 include(":common")
 include(":login")
+include(":cocktail")

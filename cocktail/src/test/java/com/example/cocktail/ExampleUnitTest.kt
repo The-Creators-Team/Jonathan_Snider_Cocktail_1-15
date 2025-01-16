@@ -1,4 +1,4 @@
-package com.example.navigation
+package com.example.cocktail
 
 import org.junit.Test
 

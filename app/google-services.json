@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "857298686575",
+    "project_id": "jonathan-snider-cocktail",
+    "storage_bucket": "jonathan-snider-cocktail.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:857298686575:android:cae57b9b75bcf50edcf39a",
+        "android_client_info": {
+          "package_name": "com.jonathansnidercocktail"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDikIZGjPdJng8knU1prsHghrCIMjy_H2A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
