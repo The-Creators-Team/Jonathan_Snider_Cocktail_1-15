@@ -47,7 +47,7 @@ fun LoginScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.secondary)
+            //.background(MaterialTheme.colorScheme.secondary)
     )
 
     {

@@ -1,9 +1,12 @@
 package com.example.login
 
+import androidx.compose.foundation.background
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -18,7 +21,9 @@ fun LoginNavigation() {
     val loginNavController = rememberNavController()
     NavHost(
         navController = loginNavController,
-        startDestination = LoginScreenRoute
+        startDestination = LoginScreenRoute,
+        modifier = Modifier
+            .background(MaterialTheme.colorScheme.secondary)
     ){
         composable<LoginScreenRoute>{
             LoginScreen(
