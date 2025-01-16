@@ -33,12 +33,15 @@ import com.example.common.model.DrinkList
 import com.example.common.networking.DrinkClient
 import com.example.common.util.onError
 import com.example.common.util.onSuccess
+import com.example.common.viewmodel.DrinkViewModel
 import kotlinx.coroutines.launch
 
 @Composable
 fun SearchDrinkByLetterScreen(
-    drinkClient: DrinkClient,
+    //drinkClient: DrinkClient,
     //navigateToSearchDrinkByLetterScreen: () -> Unit
+    drinkViewModel: DrinkViewModel
+    //drinkViewModel: DrinkViewModel = viewModel()
 ) {
     val scope = rememberCoroutineScope()
 
@@ -68,19 +71,7 @@ fun SearchDrinkByLetterScreen(
                             text = letter.toString(),
                             modifier = Modifier
                                 .clickable {
-                                    scope.launch {
-                                        println("DOING API CALL")
-                                        drinkClient.searchDrinksLetter(letter.toString())
-                                            .onSuccess { example ->
-                                                println("PRINTING SUCCESS")
-                                                drinkList = example
-                                                println(example)
-                                            }
-                                            .onError { example ->
-                                                println("PRINTING ERROR")
-                                                println(example)
-                                            }
-                                    }
+                                    drinkViewModel.searchDrinksByLetter(letter.toString())
                                 }
                                 .padding(8.dp),
                         )

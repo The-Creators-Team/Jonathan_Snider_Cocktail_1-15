@@ -24,6 +24,7 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -35,23 +36,29 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import com.example.common.model.Drink
 import com.example.common.model.DrinkList
 import com.example.common.networking.DrinkClient
 import com.example.common.util.onError
 import com.example.common.util.onSuccess
+import com.example.common.viewmodel.DrinkViewModel
 import kotlinx.coroutines.launch
 
 
 @Composable
 fun SearchDrinkByNameScreen(
-    drinkClient: DrinkClient,
-    navigateToSearchDrinkByLetterScreen: () -> Unit
+    //drinkClient: DrinkClient,
+    navigateToSearchDrinkByLetterScreen: () -> Unit,
+    drinkViewModel: DrinkViewModel
+    //drinkViewModel: DrinkViewModel = viewModel()
 ) {
     val scope = rememberCoroutineScope()
+    val drinkList by drinkViewModel.drinks.collectAsState()
+    //val apiResult by drinkViewModel.apiResult.collectAsState(initial = null) // Initial is needed for SharedFlow
 
-    var drinkList by remember { mutableStateOf(DrinkList(emptyList())) }
+    //var drinkList by remember { mutableStateOf(DrinkList(emptyList())) }
     var drinkSearchText by remember { mutableStateOf("") }
     Box(
         modifier = Modifier
@@ -107,7 +114,7 @@ fun SearchDrinkByNameScreen(
         Column {
             Button(
                 onClick = {
-                    scope.launch {
+                /*    scope.launch {
                         println("DOING API CALL")
                         drinkClient.searchDrinksName(drinkSearchText)
                             .onSuccess { example ->
@@ -119,7 +126,8 @@ fun SearchDrinkByNameScreen(
                                 println("PRINTING ERROR")
                                 println(example)
                             }
-                    }
+                    }*/
+                    drinkViewModel.searchDrinksByName(drinkSearchText)
                 }
             ) {
                 Text("Make API call")
