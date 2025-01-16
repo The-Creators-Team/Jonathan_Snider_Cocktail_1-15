@@ -41,8 +41,8 @@ fun CocktailNavigation() {
         }
         composable<SearchDrinkByLetterScreenRoute> {
             SearchDrinkByLetterScreen(
-                drinkClient=drinkClient
-
+                drinkClient = drinkClient,
+                drinkViewModel = drinkViewModel
             )
         }
     }

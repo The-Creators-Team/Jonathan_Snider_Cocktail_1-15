@@ -38,7 +38,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun SearchDrinkByLetterScreen(
-    //drinkClient: DrinkClient,
+    drinkClient: DrinkClient,
     //navigateToSearchDrinkByLetterScreen: () -> Unit
     drinkViewModel: DrinkViewModel
     //drinkViewModel: DrinkViewModel = viewModel()
@@ -71,7 +71,19 @@ fun SearchDrinkByLetterScreen(
                             text = letter.toString(),
                             modifier = Modifier
                                 .clickable {
-                                    drinkViewModel.searchDrinksByLetter(letter.toString())
+                                    scope.launch {
+                                        println("DOING API CALL")
+                                        drinkClient.searchDrinksLetter(letter.toString())
+                                            .onSuccess { example ->
+                                                println("PRINTING SUCCESS")
+                                                drinkList = example
+                                                println(example)
+                                            }
+                                            .onError { example ->
+                                                println("PRINTING ERROR")
+                                                println(example)
+                                            }
+                                    }
                                 }
                                 .padding(8.dp),
                         )
