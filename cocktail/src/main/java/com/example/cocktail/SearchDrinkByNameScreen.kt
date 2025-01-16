@@ -36,7 +36,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.example.common.api.APIDetails
 import com.example.common.model.Drink
 import com.example.common.model.DrinkList
 import com.example.common.networking.DrinkClient
@@ -48,6 +47,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun SearchDrinkByNameScreen(
     drinkClient: DrinkClient,
+    navigateToSearchDrinkByLetterScreen: () -> Unit
 ) {
     val scope = rememberCoroutineScope()
 
@@ -90,16 +90,16 @@ fun SearchDrinkByNameScreen(
             LazyColumn(
                 modifier = Modifier
             ) {
-                items(drinkList.drinks.size) { drink ->
+                items(drinkList.drinks?.size ?: 0) { drink ->
                     DrinkCard(
-                        drink = drinkList.drinks[drink]
+                        drink = drinkList.drinks!![drink]
                     )
                 }
             }
         }
 
 
-        if (drinkList.drinks.isEmpty()) {
+        if (drinkList.drinks.isNullOrEmpty()) {
             Text(text = "waiting for drinks")
         }
 
@@ -125,16 +125,7 @@ fun SearchDrinkByNameScreen(
                 Text("Make API call")
             }
             Button(
-                onClick = {
-                    println("PRINTING DRINK LIST")
-                    println(drinkList.drinks[0])
-                }
-            ) {
-                Text("Test drink list")
-            }
-            Button(
-                //onClick = navigateToPeopleScreen
-                onClick = {}
+                onClick = navigateToSearchDrinkByLetterScreen
             ) {
                 Text("Go To Next Screen")
             }

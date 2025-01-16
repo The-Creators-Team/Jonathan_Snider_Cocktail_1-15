@@ -20,10 +20,21 @@ fun CocktailNavigation() {
     NavHost(
         navController = drinkNavController,
         startDestination = SearchDrinkByNameScreenRoute
-    ){
+    ) {
         composable<SearchDrinkByNameScreenRoute> {
             SearchDrinkByNameScreen(
-                drinkClient =drinkClient
+                drinkClient = drinkClient,
+                navigateToSearchDrinkByLetterScreen = {
+                    drinkNavController.navigate(
+                        SearchDrinkByLetterScreenRoute
+                    )
+                }
+            )
+        }
+        composable<SearchDrinkByLetterScreenRoute> {
+            SearchDrinkByLetterScreen(
+                drinkClient=drinkClient
+
             )
         }
     }
@@ -32,40 +43,5 @@ fun CocktailNavigation() {
 @Serializable
 object SearchDrinkByNameScreenRoute
 
-
-/*
-@Composable
-fun DrinkCard(
-    drink: Drink
-) {
-    Card(
-
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-
-            Image(
-                painter = painterResource(id = drink.imageResId),
-                contentDescription = "Drink Image",
-                modifier = Modifier
-                    .size(50.dp)
-                    .clip(CircleShape)
-            )
-            Spacer(modifier = Modifier.width(16.dp))
-
-            // Drink Name
-            Text(
-                text = drink.name,
-                modifier = Modifier.weight(1f)
-            )
-        }
-    }
-}*/
+@Serializable
+object SearchDrinkByLetterScreenRoute
