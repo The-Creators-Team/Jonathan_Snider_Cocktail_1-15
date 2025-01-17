@@ -35,7 +35,7 @@ class LoginScreenTests {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    val auth = Firebase.auth
+
 
     @Before
     //otherwise known as @BeforeEach in Junit 5
@@ -71,7 +71,7 @@ class LoginScreenTests {
 
 
 
-/*    @Test
+    @Test
     fun loginScreen_successfulStart() {
         //setting up mock values to put into the email and password fields
         val email = "test@example.com"
@@ -79,7 +79,7 @@ class LoginScreenTests {
         //setting up a basic version of the home page and navcontroller
         composeTestRule.setContent {
             val mockAuth = mockk<FirebaseAuth>(relaxed = true)
-            val loginAuth by remember { mutableStateOf(Firebase.auth) }
+            //val loginAuth by remember { mutableStateOf(Firebase.auth) }
             val loginNavController = rememberNavController()
             NavHost(
                 navController = loginNavController,
@@ -89,14 +89,14 @@ class LoginScreenTests {
             ){
                 composable<LoginScreenRoute>{
                     LoginScreen(
-                        auth = loginAuth,
+                        auth = mockAuth,
                         navigateToRegister = { loginNavController.navigate(RegisterScreenRoute) },
                         navigateToCocktailNavigation = { loginNavController.navigate(CocktailNavigationRoute)}
                     )
                 }
                 composable<RegisterScreenRoute> {
                     RegisterScreen(
-                        auth =loginAuth,
+                        auth =mockAuth,
                         navigateToLogin = { loginNavController.navigate(LoginScreenRoute) }
                     )
                 }
@@ -250,8 +250,8 @@ class LoginScreenTests {
         //then test to see if we successfully navigated to the home screen page
         //(has nothing on it but a text box saying 'hello')
 
-           *//* composeTestRule.onNodeWithText("hello", ignoreCase = true)
-                .isDisplayed()*//*
+            composeTestRule.onNodeWithText("hello", ignoreCase = true)
+                .isDisplayed()
 
 
         composeTestRule.waitUntil(2000) {
@@ -260,7 +260,7 @@ class LoginScreenTests {
         }
 
 
-    }*/
+    }
 
 
 }

@@ -36,6 +36,13 @@ android {
     buildFeatures {
         compose = true
     }
+
+    packaging {
+        resources {
+            excludes += "META-INF/LICENSE.md"
+            excludes += "META-INF/LICENSE-notice.md"
+        }
+    }
 }
 
 dependencies {
@@ -51,7 +58,6 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(project(":cocktail"))
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
@@ -63,9 +69,9 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
 
     //mocking for testing
-    /*androidTestImplementation(libs.mockk.android)
+    androidTestImplementation(libs.mockk.android)
     androidTestImplementation(libs.mockk.agent)
-    androidTestImplementation(libs.mockk)*/
+    androidTestImplementation(libs.mockk)
 
 
 }
