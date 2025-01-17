@@ -10,31 +10,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.common.model.DrinkList
 import com.example.common.networking.DrinkClient
-import com.example.common.util.onError
-import com.example.common.util.onSuccess
 import com.example.common.viewmodel.DrinkViewModel
-import kotlinx.coroutines.launch
 
 @Composable
 fun SearchDrinkByLetterScreen(
@@ -45,7 +31,7 @@ fun SearchDrinkByLetterScreen(
 ) {
     val scope = rememberCoroutineScope()
 
-    var drinkList by remember { mutableStateOf(DrinkList(emptyList())) }
+    val drinkList by drinkViewModel.drinks.collectAsState()
     Box(
         modifier = Modifier
             .fillMaxSize(),
@@ -71,19 +57,7 @@ fun SearchDrinkByLetterScreen(
                             text = letter.toString(),
                             modifier = Modifier
                                 .clickable {
-                                    scope.launch {
-                                        println("DOING API CALL")
-                                        drinkClient.searchDrinksLetter(letter.toString())
-                                            .onSuccess { example ->
-                                                println("PRINTING SUCCESS")
-                                                drinkList = example
-                                                println(example)
-                                            }
-                                            .onError { example ->
-                                                println("PRINTING ERROR")
-                                                println(example)
-                                            }
-                                    }
+                                    drinkViewModel.searchDrinksByLetter(letter.toString())
                                 }
                                 .padding(8.dp),
                         )
@@ -109,28 +83,28 @@ fun SearchDrinkByLetterScreen(
 
 
         Column {
-    /*        Button(
-                onClick = {
-                    scope.launch {
-                        println("DOING API CALL")
-                        drinkClient.searchDrinksName(drinkSearchText)
-                            .onSuccess { example ->
-                                println("PRINTING SUCCESS")
-                                drinkList = example
-                                println(example)
+            /*        Button(
+                        onClick = {
+                            scope.launch {
+                                println("DOING API CALL")
+                                drinkClient.searchDrinksName(drinkSearchText)
+                                    .onSuccess { example ->
+                                        println("PRINTING SUCCESS")
+                                        drinkList = example
+                                        println(example)
+                                    }
+                                    .onError { example ->
+                                        println("PRINTING ERROR")
+                                        println(example)
+                                    }
                             }
-                            .onError { example ->
-                                println("PRINTING ERROR")
-                                println(example)
-                            }
-                    }
-                }
-            )*/
-         /*   Button(
-                onClick = navigateToSearchDrinkByLetterScreen
-            ) {
-                Text("Go To Next Screen")
-            }*/
+                        }
+                    )*/
+            /*   Button(
+                   onClick = navigateToSearchDrinkByLetterScreen
+               ) {
+                   Text("Go To Next Screen")
+               }*/
         }
     }
 }
