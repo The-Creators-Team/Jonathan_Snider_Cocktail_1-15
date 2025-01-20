@@ -6,9 +6,7 @@ import com.example.common.model.DrinkList
 import com.example.common.repository.DrinkRepositoryImpl
 import com.example.common.util.onError
 import com.example.common.util.onSuccess
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -16,13 +14,12 @@ import kotlinx.coroutines.launch
 class DrinkViewModel(
     private val drinkRepositoryImpl: DrinkRepositoryImpl
 ) : ViewModel() {
-    // StateFlow for the list of drinks
-    private val _drinks = MutableStateFlow<DrinkList>(DrinkList(emptyList()))
-    val drinks: StateFlow<DrinkList> = _drinks.asStateFlow()
 
-    // SharedFlow for API call result
-  /*  private val _apiResult = MutableSharedFlow<ApiResult>()
-    val apiResult: SharedFlow<ApiResult> = _apiResult.asSharedFlow()*/
+    private val _drinksByName = MutableStateFlow<DrinkList>(DrinkList(emptyList()))
+    val drinksByName: StateFlow<DrinkList> = _drinksByName.asStateFlow()
+
+    private val _drinksByLetter = MutableStateFlow<DrinkList>(DrinkList(emptyList()))
+    val drinksByLetter: StateFlow<DrinkList> = _drinksByLetter.asStateFlow()
 
 
     fun searchDrinksByName(searchString: String) {
@@ -31,7 +28,7 @@ class DrinkViewModel(
             drinkRepositoryImpl.searchDrinksName(searchString)
                 .onSuccess { example ->
                     println("PRINTING SUCCESS")
-                    _drinks.value = example
+                    _drinksByName.value = example
                     println(example)
                 }
                 .onError { example ->
@@ -47,7 +44,7 @@ class DrinkViewModel(
             drinkRepositoryImpl.searchDrinksLetter(searchLetter)
                 .onSuccess { example ->
                     println("PRINTING SUCCESS")
-                    _drinks.value = example
+                    _drinksByLetter.value = example
                     println(example)
                 }
                 .onError { example ->

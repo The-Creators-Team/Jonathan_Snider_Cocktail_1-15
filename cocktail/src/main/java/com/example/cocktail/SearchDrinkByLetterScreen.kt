@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.common.networking.DrinkClient
 import com.example.common.viewmodel.DrinkViewModel
+import com.example.composables.DrinkCard
 
 @Composable
 fun SearchDrinkByLetterScreen(
@@ -31,7 +32,7 @@ fun SearchDrinkByLetterScreen(
 ) {
     val scope = rememberCoroutineScope()
 
-    val drinkList by drinkViewModel.drinks.collectAsState()
+    val drinkList by drinkViewModel.drinksByLetter.collectAsState()
     Box(
         modifier = Modifier
             .fillMaxSize(),

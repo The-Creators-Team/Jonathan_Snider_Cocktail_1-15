@@ -58,10 +58,4 @@ dependencies {
     //navigation
     implementation(libs.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
-
-    //Image Loading with Coil
-    /*implementation(libs.coil.core)
-    implementation(libs.coil.compose)*/
-    implementation(libs.coil.compose)
-    implementation(libs.coil.network.okhttp)
 }

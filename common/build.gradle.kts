@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
+
     alias(libs.plugins.kotlin.serialization)
 }
 
@@ -50,4 +52,12 @@ dependencies {
 
     // Optional
     implementation(libs.ktor.client.logging)
+
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.material3)
+
+    //Image Loading with Coil
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 }
